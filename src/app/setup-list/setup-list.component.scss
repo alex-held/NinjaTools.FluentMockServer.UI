@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+
+tr.setup-detail-row {
+  height: 0;
+}
+
+tr.setup-element-row:not(.example-expanded-row):hover {
+  background: #777;
+}
+
+tr.setup-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.setup-element-row td {
+  border-bottom-width: 0;
+}
+
+.setup-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.setup-list-card {
+  max-width: 80%;
+}
