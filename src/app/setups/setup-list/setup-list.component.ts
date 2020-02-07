@@ -1,6 +1,6 @@
-import { SetupService } from './../setup.service';
-import { Component, OnInit } from '@angular/core';
-import { Setup } from '../setup';
+import { SetupService } from '../../setup.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Setup } from '../../models/setup';
 import {
   animate,
   state,
@@ -10,9 +10,9 @@ import {
 } from '@angular/animations';
 
 @Component({
-  selector: 'app-setups',
-  templateUrl: './setups.component.html',
-  styleUrls: ['./setups.component.scss'],
+  selector: 'app-setup-list',
+  templateUrl: './setup-list.component.html',
+  styleUrls: ['./setup-list.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -24,10 +24,10 @@ import {
     ])
   ]
 })
-export class SetupsComponent implements OnInit {
-  activeSetups: Setup[] = [];
-  matchedSetups: Setup[] = [];
-  
+export class SetupListComponent implements OnInit {
+  @Input() setups: Setup[] = [];
+  @Input() title = 'Setups';
+
   columns = [
     { field: 'method', header: 'Method' },
     { field: 'path', header: 'Path' }
@@ -40,6 +40,6 @@ export class SetupsComponent implements OnInit {
   ngOnInit(): void {
     this.setupService
       .getActiveSetups()
-      .subscribe(setups => (this.activeSetups = setups));
+      .subscribe(setups => (this.setups = setups));
   }
 }

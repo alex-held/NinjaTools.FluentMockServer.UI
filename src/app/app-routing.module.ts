@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SetupsComponent } from './setups/setups.component';
+import { SetupDashboardComponent } from './setups/setup-dashboard/setup-dashboard.component';
 
-const routes: Routes = [{ path: 'setups', component: SetupsComponent }];
+const routes: Routes = [{ path: 'setups', component: SetupDashboardComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
