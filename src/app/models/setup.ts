@@ -11,5 +11,4 @@ export interface RequestMatcher {
 
 export interface ResponseAction {
   statusCode?: number;
-  method?: string;
 }

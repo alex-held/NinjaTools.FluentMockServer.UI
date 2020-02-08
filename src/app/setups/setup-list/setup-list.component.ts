@@ -9,6 +9,20 @@ import {
   trigger
 } from '@angular/animations';
 
+export class SetupVM {
+  constructor(setup: Setup) {
+    this.id = setup.id;
+    this.path = setup.requestMatcher.path;
+    this.method = setup.requestMatcher.method;
+    this.statusCode = setup.responseAction.statusCode;
+  }
+
+  id: string;
+  path?: string;
+  method?: string;
+  statusCode?: number;
+}
+
 @Component({
   selector: 'app-setup-list',
   templateUrl: './setup-list.component.html',
@@ -25,14 +39,10 @@ import {
   ]
 })
 export class SetupListComponent implements OnInit {
-  @Input() setups: Setup[] = [];
+  @Input() setups: SetupVM[] = [];
   @Input() title = 'Setups';
 
-  displayedColumns: string[] = [
-    'id',
-    'requestMatcher.method',
-    'responseAction.statusCode'
-  ];
+  displayedColumns: string[] = ['id', 'method', 'path', 'statusCode'];
   expandedElement: Setup | null;
 
   constructor(private setupService: SetupService) {}
@@ -40,6 +50,8 @@ export class SetupListComponent implements OnInit {
   ngOnInit(): void {
     this.setupService
       .getActiveSetups()
-      .subscribe(setups => (this.setups = setups));
+      .subscribe(
+        setups => (this.setups = setups.map(setup => new SetupVM(setup)))
+      );
   }
 }
