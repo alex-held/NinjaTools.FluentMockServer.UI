@@ -1,0 +1,45 @@
+<mat-accordion>
+    <mat-expansion-panel>
+
+
+        <mat-expansion-panel-header>
+            <mat-panel-title class="property">
+                RequestMatcher
+            </mat-panel-title>
+            <mat-panel-description>
+                Determines which incoming HttpRequests to match
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-grid-list cols="2" rowHeight="100px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <table mat-table [dataSource]="matcherProperties">
+                    <ng-container matColumnDef="{{pMatcher.name}}" *ngFor="let pMatcher of matcherProperties">
+                        <td mat-cell *matCellDef="let pMatcherValue">{{pMatcher.name}}</td>
+                        <td mat-cell *matCellDef="let pMatcherValue">{{pMatcherValue}}</td>
+                    </ng-container>
+                </table>
+                <p>Path</p>
+                <h5 class="property">Path</h5><br><br>
+                <div class="property-value">{{setup.path}}</div>
+
+            </mat-grid-tile>
+        </mat-grid-list>
+
+    </mat-expansion-panel>
+
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                ResponseAction
+            </mat-panel-title>
+            <mat-panel-description>
+                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+    </mat-expansion-panel>
+
+</mat-accordion>
