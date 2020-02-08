@@ -1,91 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Observable, of as observableOf } from 'rxjs';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import {
   MatTreeFlattener,
   MatTreeFlatDataSource
 } from '@angular/material/tree';
-
-/** Property node data with nested structure. */
-export class PropertyNode {
-  id: string;
-  name: string;
-  value: string;
-  children?: PropertyNode[];
-}
-
-/** Flat node with expandable and level information */
-export class FlatPropertyNode {
-  constructor(
-    public expandable: boolean,
-    public name: string,
-    public value: any,
-    public level: number,
-    public id: string
-  ) {}
-}
-
-export class PropertyDatabase {
-  dataChange = new BehaviorSubject<PropertyNode[]>([]);
-
-  constructor(root: any) {
-    this.initialize(root);
-  }
-
-  get data(): PropertyNode[] {
-    return this.dataChange.value;
-  }
-
-  initialize(root: any) {
-    // Parse the string to json object.
-    const dataObject = root;
-
-    // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
-    // file node as children.
-    const data = this.buildFileTree(dataObject, 0);
-
-    // Notify the change.
-    this.dataChange.next(data);
-  }
-
-  /**
-   * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
-   * The return value is the list of `FileNode`.
-   */
-  buildFileTree(
-    obj: { [key: string]: any },
-    level: number,
-    parentId: string = '0'
-  ): PropertyNode[] {
-    return Object.keys(obj).reduce<PropertyNode[]>((accumulator, key, idx) => {
-      const value = obj[key];
-      const node = new PropertyNode();
-      node.name = key;
-
-      /**
-       * Make sure your node has an id so we can properly rearrange the tree during drag'n'drop.
-       * By passing parentId to buildFileTree, it constructs a path of indexes which make
-       * it possible find the exact sub-array that the node was grabbed from when dropped.
-       */
-      node.id = `${parentId}/${idx}`;
-
-      if (value != null) {
-        if (typeof value === 'object') {
-          node.children = this.buildFileTree(value, level + 1, node.id);
-        } else {
-          node.value = value;
-        }
-      }
-
-      return accumulator.concat(node);
-    }, []);
-  }
-}
+import { PropertyDatabase } from './PropertyDatabase';
+import { FlatPropertyNode } from './FlatPropertyNode';
+import { PropertyNode } from './PropertyNode';
 
 @Component({
   selector: 'app-property-tree',
   templateUrl: './property-tree.component.html',
-  styleUrls: ['./property-tree.component.scss']
+  styleUrls: ['./property-tree.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PropertyTreeComponent implements OnInit {
   constructor() {}
@@ -231,6 +159,14 @@ export class PropertyTreeComponent implements OnInit {
     return null;
   }
 
+  log(message: string) {
+    console.warn(message);
+  }
+
+  toggle(node: FlatPropertyNode) {
+    this.log(`Toggled ${node.name} - ${this.treeControl.isExpanded(node)}`);
+    this.treeControl.toggle(node);
+  }
   ngOnInit(): void {
     this.initialize();
   }

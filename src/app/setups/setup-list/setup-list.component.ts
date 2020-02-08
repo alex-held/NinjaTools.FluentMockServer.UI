@@ -28,11 +28,11 @@ export class SetupListComponent implements OnInit {
   @Input() setups: Setup[] = [];
   @Input() title = 'Setups';
 
-  columns = [
-    { field: 'method', header: 'Method' },
-    { field: 'path', header: 'Path' }
+  displayedColumns: string[] = [
+    'id',
+    'requestMatcher.method',
+    'responseAction.statusCode'
   ];
-  displayedColumns: string[] = ['method', 'path'];
   expandedElement: Setup | null;
 
   constructor(private setupService: SetupService) {}

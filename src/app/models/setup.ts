@@ -1,4 +1,15 @@
 export interface Setup {
-  path: string;
-  method: string;
+  id: string;
+  requestMatcher: RequestMatcher;
+  responseAction: ResponseAction;
+}
+
+export interface RequestMatcher {
+  path?: string;
+  method?: string;
+}
+
+export interface ResponseAction {
+  statusCode?: number;
+  method?: string;
 }

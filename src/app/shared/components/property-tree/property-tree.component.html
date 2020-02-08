@@ -1,22 +1,23 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-        <div class="container">
-            <div class="property-graph">
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="property-tree">
 
-                <dl>
-                    <dt class="property">{{node.name | uppercase }}</dt>
-                    <dd class="property-value">{{node.value}}</dd>
-                </dl>
-            </div>
-        </div>
+    <!-- leaf node -->
+    <mat-tree-node class="property-node" *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+        <dl *ngIf="node.name !== 'id'">
+            <dt>{{node.name | uppercase }}</dt>
+            <dd class="property-value">{{node.value}}</dd>
+        </dl>
     </mat-tree-node>
 
-    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
-            <mat-icon class="mat-icon-rtl-mirror">
+    <!-- expandable node -->
+    <mat-tree-node class="property-node" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+
+        <button mat-button color="secondary" class="property-button" matTreeNodeToggle aria-label="property-node-expand-button" aria-hidden="true">
+            <mat-icon class="mat-icon-rtl-mirror column">
                 {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
+            <div class="property-name column"> &nbsp;&nbsp;&nbsp;{{node.name}}</div>
         </button>
-        {{node.value}} : {{node.type}}
+
     </mat-tree-node>
+
 </mat-tree>

@@ -1,0 +1,38 @@
+.property-tree {
+    display: block;
+    width: auto;
+}
+
+.property-name {
+    font-size: medium;
+    font-weight: 200;
+    text-align: left;
+    text-transform: capitalize;
+    display: contents;
+}
+
+.property-value {
+    margin-inline-start: 0px;
+    color: #546e7a;
+    text-align: left;
+    font-size: larger;
+    font-weight: 200;
+}
+
+.property-node {
+    display: block;
+    margin-inline-start: 0px;
+    .property-button {
+        border: none;
+        margin-right: 8px;
+    }
+    .mat-icon {
+        float: left;
+        vertical-align: top;
+    }
+}
+
+.column {
+    float: left;
+    width: 50%;
+}

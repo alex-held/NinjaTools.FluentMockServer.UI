@@ -6,7 +6,13 @@ import { Setup } from './models/setup';
   providedIn: 'root'
 })
 export class SetupService {
-  setups: Setup[] = [{ path: '/some/path', method: 'GET' }];
+  setups: Setup[] = [
+    {
+      id: '1',
+      requestMatcher: { path: '/some/path', method: 'GET' },
+      responseAction: { statusCode: 200 }
+    }
+  ];
 
   constructor() {}
 
