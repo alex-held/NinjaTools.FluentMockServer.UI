@@ -18,6 +18,11 @@ export class SetupListExpandedDetailComponent implements OnInit {
   @Input() setup: Setup | null;
   panelOpenState = false;
   matcherProperties: NameValuePair[];
+
+  getMatcherPropertyColumns(): string[] {
+    return this.matcherProperties.map(mp => mp.name);
+  }
+
   constructor() {}
 
   ngOnInit(): void {
@@ -26,5 +31,9 @@ export class SetupListExpandedDetailComponent implements OnInit {
     this.matcherProperties = propertyNames
       .map(pName => new NameValuePair(pName, this.setup[pName]))
       .filter(nvp => nvp.value);
+
+    this.matcherProperties.forEach(nvp =>
+      console.log(`Property=${nvp.name}; Value=${nvp.value}`)
+    );
   }
 }

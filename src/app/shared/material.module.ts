@@ -1,3 +1,4 @@
+import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
@@ -6,6 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   imports: [
     MatTableModule,
@@ -13,7 +15,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatCardModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatGridListModule
+    MatGridListModule,
+    MatIconModule,
+    MatButtonModule
   ],
   exports: [
     MatTableModule,
@@ -21,7 +25,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatCardModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatGridListModule
+    MatGridListModule,
+    MatIconModule
   ]
 })
 export class MaterialComponentsModule {}
