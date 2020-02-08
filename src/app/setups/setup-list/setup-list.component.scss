@@ -10,11 +10,11 @@ tr.setup-detail-row {
     height: 0;
 }
 
-tr.setup-element-row:not(.setup-element-row):hover {
+tr.setup-element-row:not(.expanded):hover {
     background: #777;
 }
 
-tr.setup-element-row:not(.setup-element-row):active {
+tr.setup-element-row:not(.expanded):active {
     background: #efefef;
 }
 

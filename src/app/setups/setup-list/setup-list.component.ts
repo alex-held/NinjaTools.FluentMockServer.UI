@@ -39,19 +39,67 @@ export class SetupVM {
   ]
 })
 export class SetupListComponent implements OnInit {
-  @Input() setups: SetupVM[] = [];
+  constructor(private setupService: SetupService) {}
+  @Input() setups: Setup[] = [];
   @Input() title = 'Setups';
 
-  displayedColumns: string[] = ['id', 'method', 'path', 'statusCode'];
+  columns: { title: string; propertyPath: string }[] = [
+    { title: 'method', propertyPath: 'requestMatcher.method' },
+    { title: 'path', propertyPath: 'requestMatcher.path' },
+    { title: 'statusCode', propertyPath: 'responseAction.statusCode' }
+  ];
+
+  columnsToDisplay: string[] = ['method', 'path', 'statusCode'];
+
   expandedElement: Setup | null;
 
-  constructor(private setupService: SetupService) {}
+  getDisplayedColumns(): string[] {
+    return this.columns.map(col => col.title);
+  }
+
+  isExpandedElement(setup: Setup): boolean {
+    return this.expandedElement === setup;
+  }
+
+  getPropertyValue(setup: Setup, path: string): any | null {
+    if (!this.expandedElement) {
+      return null;
+    }
+    console.log(`Attempting to resolve deep property with path=${path}...`);
+    const segments = path.split('.');
+    let property: any = this.expandedElement;
+
+    segments.forEach(ps => {
+      console.log(
+        `Getting deep property with path-segment=${ps} of path=${path}`
+      );
+      property = property[ps];
+      if (!property) {
+        return null;
+      }
+    });
+
+    return property;
+  }
+
+  getPropertyValueForColumn(setup: Setup, column: string): any {
+    return this.getPropertyValue(
+      setup,
+      this.columns.find(col => col.title === column).propertyPath
+    );
+  }
+
+  toggleExpandedRow(setup: Setup) {
+    this.expandedElement = this.expandedElement === setup ? null : setup;
+  }
+
+  getExpandedState(setup: Setup): string {
+    return this.expandedElement === setup ? 'expanded' : 'collapsed';
+  }
 
   ngOnInit(): void {
     this.setupService
       .getActiveSetups()
-      .subscribe(
-        setups => (this.setups = setups.map(setup => new SetupVM(setup)))
-      );
+      .subscribe(setups => (this.setups = setups));
   }
 }
