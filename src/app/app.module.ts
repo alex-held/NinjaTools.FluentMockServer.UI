@@ -1,3 +1,4 @@
+import { PropertyTreeComponent } from './shared/components/property-tree/property-tree.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -27,7 +28,8 @@ import { MaterialComponentsModule } from './shared/material.module';
     SetupListComponent,
     SetupDetailComponent,
     SetupListExpandedDetailComponent,
-    DashComponent
+    DashComponent,
+    PropertyTreeComponent
   ],
   imports: [
     BrowserModule,

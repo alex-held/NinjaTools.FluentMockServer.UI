@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatTreeModule } from '@angular/material/tree';
 @NgModule({
   imports: [
     MatTableModule,
@@ -17,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTreeModule
   ],
   exports: [
     MatTableModule,
@@ -26,7 +28,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatTreeModule
   ]
 })
 export class MaterialComponentsModule {}

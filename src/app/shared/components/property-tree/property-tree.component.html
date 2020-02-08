@@ -1,0 +1,22 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+        <div class="container">
+            <div class="property-graph">
+
+                <dl>
+                    <dt class="property">{{node.name | uppercase }}</dt>
+                    <dd class="property-value">{{node.value}}</dd>
+                </dl>
+            </div>
+        </div>
+    </mat-tree-node>
+
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
+            <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+        </button>
+        {{node.value}} : {{node.type}}
+    </mat-tree-node>
+</mat-tree>
