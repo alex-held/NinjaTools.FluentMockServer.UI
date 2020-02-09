@@ -1,0 +1,44 @@
+body {
+    margin: 40px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-gap: 20px;
+    background-color: #fff;
+    color: #444;
+}
+
+.box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 15px;
+}
+
+.line-divider {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #424242;
+    width: 20px;
+}
+
+.form-part {
+    margin: 40px;
+    padding: 20px;
+}
+
+.part-header {
+    font-size: larger;
+    font-weight: 400;
+    color: #546E7A;
+    padding-bottom: 4px;
+    .description {
+        padding-top: 4px;
+        font-size: smaller;
+        font-weight: 200;
+        color: black;
+    }
+}

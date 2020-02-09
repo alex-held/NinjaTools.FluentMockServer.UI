@@ -6,6 +6,7 @@ import { Setup } from './models/setup';
   providedIn: 'root'
 })
 export class SetupService {
+  constructor() {}
   setups: Setup[] = [
     {
       id: '1',
@@ -18,8 +19,9 @@ export class SetupService {
       responseAction: { statusCode: 404 }
     }
   ];
-
-  constructor() {}
+  getSetupById(setupId: string): Observable<Setup> {
+    return of(this.setups.find(setup => setup.id === setupId));
+  }
 
   getActiveSetups(): Observable<Setup[]> {
     return of(this.setups);

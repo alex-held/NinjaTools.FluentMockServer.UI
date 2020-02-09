@@ -1,2 +1,62 @@
-<div class="setup-element-path">{{setup.requestMatcher.path}}</div>
-<div class="setup-element-method">{{setup.requestMatcher.method}}</div>
+<div class="request-matcher-wrapper">
+
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" role="form">
+
+        <!-- HttpRequestMatcher-->
+        <div div="form-part">
+
+            <div class="part-header"> HttpRequestMatcher
+                <p class="description">
+                    Configure to specifiy which requests you want to match.
+                </p>
+            </div>
+
+            <!-- Method-->
+            <fieldset class="form-group">
+                <mat-label>Method</mat-label>
+                <input class="form-control" matInput [formControl]="form.get('method')" placeholder="POST, GET, PUT, PATCH, ...">
+                <mat-hint>The http verb. (only letters and max range 10) </mat-hint>
+                <mat-error *ngIf="!form.get('method').valid">The provided HttpMethod did not meet the requirements.
+                </mat-error>
+            </fieldset>
+
+            <!-- Path-->
+            <fieldset class="form-group">
+                <mat-label>Path</mat-label>
+                <input class="form-control" matInput [formControl]="form.get('path')" placeholder="/some/path/to/an/api/resource">
+                <mat-hint>The path value must begin with an '/'.</mat-hint>
+                <mat-error *ngIf="!form.get('path').valid">The provided path is not valid.</mat-error>
+            </fieldset>
+
+        </div>
+
+        <mat-divider class="line-divider"></mat-divider>
+
+        <!-- HttpResponseAction-->
+        <div class="form-part">
+
+            <div class="part-header"> HttpResponseAction
+                <p class="description">
+                    Configure to specifiy which action you want to execute in case the request got matched.
+                </p>
+            </div>
+
+            <!-- StatusCode -->
+            <fieldset class="form-group">
+                <mat-label>Status Code</mat-label>
+                <input class="form-control" matInput [formControl]="form.get('statusCode')" type="number" placeholder="200, 201, 400, 404, 500, ...">
+                <mat-hint>The value be a valid HttpStatusCode in the range 200-900.</mat-hint>
+                <mat-error *ngIf="!form.get('statusCode').valid">The provided HttpStatusCode is not valid.</mat-error>
+            </fieldset>
+
+        </div>
+
+
+        <!-- Save-->
+        <button mat-flat-button color="primary" type="submit" aria-setsize="" [disabled]="!form.valid">
+            Submit
+        </button>
+    </form>
+
+</div>

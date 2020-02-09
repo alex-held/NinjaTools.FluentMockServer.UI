@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SetupDashboardComponent } from './setups/setup-dashboard/setup-dashboard.component';
-import { DashComponent } from './dash/dash.component';
+import { SetupDetailComponent } from './setups/setup-detail/setup-detail.component';
 
 const routes: Routes = [
-  { path: 'setups', component: SetupDashboardComponent },
-  { path: 'dash', component: DashComponent }
+  { path: 'setups/:id', component: SetupDetailComponent }
 ];
 
 @NgModule({
